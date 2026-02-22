@@ -212,8 +212,8 @@ if notExists "${TMP_PATH}/tmp_join.tsv"; then
 	elif [ -e "${SCRIPT_NO_BUILD}/bin/Pfam-A.clans.tsv" ]; then
 		awk -F '\t' -v OFS='\t' '{print $1, $5}' "${SCRIPT_NO_BUILD}/bin/Pfam-A.clans.tsv" >> "${TMP_PATH}/PfamMappingFile"
 	else
-		curl -o "${TMP_PATH}/pfamA_desc.tsv" https://raw.githubusercontent.com/soedinglab/transannot/main/data/Pfam-A.clans.tsv >> "${TMP_PATH}/PfamMappingFile"
-		awk -F '\t' -v OFS='\t' '{print $1, $5}' "${TMP_PATH}/pfamA_desc.tsv"
+		curl -sS -o "${TMP_PATH}/pfamA_desc.tsv" https://raw.githubusercontent.com/soedinglab/transannot/main/data/Pfam-A.clans.tsv
+		awk -F '\t' -v OFS='\t' '{print $1, $5}' "${TMP_PATH}/pfamA_desc.tsv" >> "${TMP_PATH}/PfamMappingFile"
 		rm -rf "${TMP_PATH}/pfamA_desc.tsv"
 	fi
 	# awk -F '\t' -v OFS='\t' '{print $1, $5}' "${SCRIPT}/data/Pfam-A.clans.tsv" >> "${TMP_PATH}/PfamMappingFile" || awk -F '\t' -v OFS='\t' '{print $1, $5}' "${SCRIPT_NO_BUILD}/bin/Pfam-A.clans.tsv" >> "${TMP_PATH}/PfamMappingFile"
